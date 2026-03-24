@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jarvis.dto.UserDTO;
 import com.jarvis.model.User;
 import com.jarvis.service.UserService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
@@ -20,8 +23,8 @@ public class UserController {
 	private UserService service;
 	
 	@PostMapping
-	public User create(@RequestBody User user) {
-		return service.createUser(user);
+	public User create(@Valid @RequestBody UserDTO dto) {
+		return service.createUser(dto);
 	}
 	@GetMapping
 	public List<User> getAll(){
